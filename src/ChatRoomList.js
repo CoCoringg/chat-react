@@ -10,32 +10,34 @@ import SearchBar from './SearchBar';
 import ChatRoom from './ChatRoom';
 import ChatMessageList from './ChatMessageList';
 
-const ChatRoomList = () => {
-    const [messageList, setMessageList ] = useState(''); 
-
-    const ClickEvent = () => {
-        setMessageList('one');
-    }
+const ChatRoomList = ({chatRoomId, chatMessage, roomList, setRoomName}) => {
 
     return (
-        <div style={{display: 'flex'}}>
-            <div className="col-md-6 col-lg-5 col-xl-4 mb-4 mb-md-0 p-3" style={{flex:'1'}}>
+        
+            <div className="col-md-6 col-lg-5 col-xl-4 mb-4 mb-md-0 p-3">
 
                 {/**검색바 */}
                 <SearchBar />
 
                 <div className="bar" data-mdb-perfect-scrollbar="true" style={{ position: 'relative', height: '400px' }}>
                     <ul className="list-unstyled mb-0">
-                        {/**채팅방 */}
-                        <ChatRoom callback={'one'} />
-                        <ChatRoom callback={'two'}/>
+                        {/**채팅방 */
+                            roomList.map((e) => (
+                                <ChatRoom
+                                    key={e.no}
+                                    chatMessage={chatMessage}
+                                    chatRoomId={chatRoomId}
+                                    setRoomName = {setRoomName}
+                                    chatRoomName = {e.name}
+                                    roomNo = {e.no}
+                                    />
+                            ))
+                            
+                        }
                     </ul>
                 </div>
             </div>
-            <div className="col-md-6 col-lg-7 col-xl-8" style={{flex:'1'}}>
-                <ChatMessageList />
-            </div>
-        </div>
+        
     );
 };
 

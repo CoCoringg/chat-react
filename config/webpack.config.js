@@ -4,7 +4,11 @@ module.exports = function(env) {
     return {
         mode: 'development',
         entry: path.resolve(`src/index.js`),
-        
+        output: {
+            path: path.resolve('../backend/plendar_spring_boot/src/main/resources'),
+            filename: 'assets/js/main.js',
+            assetModuleFilename:'assets/images/[hash][ext]'
+        },
         module:{
             rules:[{
                 test: /\.js$/i,
@@ -34,11 +38,12 @@ module.exports = function(env) {
             host: '0.0.0.0',
             port: 8000,
             proxy: {
-                "/chat":'http://localhost:9090'
+                "/api":'http://localhost:8080'
             },
+            
             liveReload: true,
-            hot: true,
-            compress: true
+            hot: false,
+            compress: true,
         }
     }
 }

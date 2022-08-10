@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import {BrowserRouter as Router} from 'react-router-dom';
 import App from './App';
-import App2 from './App2';
-import Chat from './Chat';
-import Test from './Test';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<Chat />);
+root.render(
+    <Router>
+      <App />
+    </Router>
+);
