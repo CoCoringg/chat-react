@@ -10,7 +10,7 @@ import SearchBar from './SearchBar';
 import ChatRoom from './ChatRoom';
 import ChatMessageList from './ChatMessageList';
 
-const ChatRoomList = ({chatRoomId, chatMessage, roomList, setRoomName}) => {
+const ChatRoomList = ({callback, chatRoomId, roomList}) => {
 
     return (
         
@@ -25,14 +25,11 @@ const ChatRoomList = ({chatRoomId, chatMessage, roomList, setRoomName}) => {
                             roomList.map((e) => (
                                 <ChatRoom
                                     key={e.no}
-                                    chatMessage={chatMessage}
-                                    chatRoomId={chatRoomId}
-                                    setRoomName = {setRoomName}
-                                    chatRoomName = {e.name}
-                                    roomNo = {e.no}
-                                    />
-                            ))
-                            
+                                    selected={e.no === chatRoomId}
+                                    chatRoomName={e.name}
+                                    roomNo={e.no}
+                                    callback={callback}/>
+                            ))                            
                         }
                     </ul>
                 </div>

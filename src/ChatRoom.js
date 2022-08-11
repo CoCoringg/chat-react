@@ -7,19 +7,19 @@ import './assets/css/bar.css';
 import ChatMessageList from './ChatMessageList';
 import { Link } from 'react-router-dom';
 
-const ChatRoom = ({roomNo, chatRoomId,chatMessage, chatRoomName, setRoomName}) => {
-    const roomClick = (e) => {
-        e.preventDefault();
-        console.log(roomNo);
-        console.log(chatRoomName);
-        chatMessage(roomNo);
-        setRoomName(chatRoomName);
+const ChatRoom = ({selected, chatRoomName, roomNo, callback}) => {
+    console.log(selected, chatRoomName, roomNo);
+
+    const roomClick = () => {
+        callback(roomNo);
+        // callback(chatRoomName);
     };
+
     return (
         <div>
         <li className="p-2 border-bottom">
-            <a href="/" className="d-flex justify-content-between" onClick={roomClick}>
-                <div className="d-flex flex-row">
+            <div className="d-flex justify-content-between" >
+                <div className="d-flex flex-row" onClick={roomClick} style={{backgroundColor: selected ? "#f00" : "#fff"}}>
                     <div>
                         <img
                             src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
@@ -34,7 +34,7 @@ const ChatRoom = ({roomNo, chatRoomId,chatMessage, chatRoomName, setRoomName}) =
                     <p className="small text-muted mb-1">Just now</p>
                     <span className="badge bg-danger rounded-pill float-end">3</span>
                 </div>
-            </a>
+            </div>
         </li>
         
         
