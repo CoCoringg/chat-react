@@ -1,25 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
+
 import './assets/css/mdb.dark.min.css';
 import './assets/css/mdb.dark.rtl.min.css';
 import './assets/css/mdb.min.css';
 import './assets/css/mdb.rtl.min.css';
 import './assets/css/bar.css';
-import ChatMessageList from './ChatMessageList';
-import { Link } from 'react-router-dom';
+
 
 const ChatRoom = ({selected, chatRoomName, roomNo, callback}) => {
     console.log(selected, chatRoomName, roomNo);
 
     const roomClick = () => {
         callback(roomNo);
-        // callback(chatRoomName);
     };
 
     return (
-        <div>
         <li className="p-2 border-bottom">
-            <div className="d-flex justify-content-between" >
-                <div className="d-flex flex-row" onClick={roomClick} style={{backgroundColor: selected ? "#f00" : "#fff"}}>
+            <div className="d-flex justify-content-between" style={{backgroundColor: selected ? "#EFEFFA" : "#fff", borderRadius: "10px"}} >
+                <div className="d-flex flex-row" onClick={roomClick}>
                     <div>
                         <img
                             src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
@@ -36,10 +34,6 @@ const ChatRoom = ({selected, chatRoomName, roomNo, callback}) => {
                 </div>
             </div>
         </li>
-        
-        
-        </div>
-        
     );
 };
 

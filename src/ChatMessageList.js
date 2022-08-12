@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
-import * as StompJs from "@stomp/stompjs";
-import * as SockJS from "sockjs-client";
+import React, { useState } from "react";
+
 import './assets/css/mdb.dark.min.css';
 import './assets/css/mdb.dark.rtl.min.css';
 import './assets/css/mdb.min.css';
 import './assets/css/mdb.rtl.min.css';
 import './assets/css/bar.css';
+
 import plane from './assets/images/plane.png';
 import ChatMessageReceive from "./ChatMessageReceive";
 import ChatMessageSend from "./ChatMessageSend";
@@ -17,11 +17,7 @@ const ChatMessageList = ({chatRoomId, messages, publish}) => {
     const [name, setName] = useState("");
     const [message, setMessage] = useState("");
 
-    console.log(messages);
-    
     return (
-        
-        
         <div className="col-md-6 col-lg-7 col-xl-8">
            {chatRoomId != -1 ? (
                 <div>
@@ -30,7 +26,13 @@ const ChatMessageList = ({chatRoomId, messages, publish}) => {
                         data-mdb-perfect-scrollbar="true"
                         style={{ position: "relative", height: "400px" }}>
                         {chatRoomId}
-                        {messages.map((msg, i) => <div key={i}>{msg.message}</div>)}
+                        {
+                            messages.map((msg, i) => (
+                                msg.sender == '나나' ? 
+                                <ChatMessageSend key={i} content={msg.message} date={msg.date} time={msg.time}/>:
+                                <ChatMessageReceive key={i} name={msg.sender} content={msg.message} date={msg.date} time={msg.time}/>
+                            ))
+                        }
                     </div>
 
                     <div className="text-muted d-flex justify-content-start align-items-center pe-3 pt-3 mt-2">

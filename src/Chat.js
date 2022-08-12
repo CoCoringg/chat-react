@@ -27,12 +27,6 @@ const Chat = () => {
         _setMessages(messages);
     }
 
-    const [name, setName] = useState("");
-    const [message, setMessage] = useState("");
-
-    const [date, setDate] = useState("");
-    const [time, setTime] = useState("");
-
     const [subStatus, setSubStatus] = useState([roomIdSelected]);
 
     const changeRoomIdSelected = (id) => {
@@ -113,7 +107,7 @@ const Chat = () => {
     //     client.current.unsubscribe();
     // }
 
-    const publish = (sender, line) => {
+    const publish = async (sender, line) => {
         if (!client.current.connected) {
             return;
         }
@@ -122,23 +116,36 @@ const Chat = () => {
         let time = {
             year: today.getFullYear(), //현재 년도
             month: today.getMonth() + 1, // 현재 월
-            date: today.getDate(), // 현제 날짜
+            date: today.getDate(), // 현재 날짜
             hours: today.getHours(), //현재 시간
             minutes: ("0" + today.getMinutes()).slice(-2), //현재 분 ('0'+minutes).slice(-2)
+            seconds: ("0" + today.getSeconds()).slice(-2)
         };
-
-        let timestring = `${time.year}/${time.month}/${time.date} ${time.hours}:${time.minutes}`;
-        setDate(`${time.month}월 ${time.date}일`);
-        setTime(`${time.hours}:${time.minutes}`);
+        //let timestring = `${time.year}/${time.month}/${time.date} ${time.hours}:${time.minutes}`;
+        
         client.current.publish({
             destination: `/topic/chat/room/${roomIdSelected}`,
             body: JSON.stringify({
                 roomSeq: roomIdSelected,
                 message: line,
                 sender: sender,
-                date: timestring,
+                date: `${time.month}월${time.date}일`,
+                time: `${time.hours}:${time.minutes}`
             }),
         });
+
+        // axios.post('http://localhost:8080/api/chat/message/send', {
+        //     message: line,
+        //     sender: sender,
+        //     userNo: 1,
+        //     date: `${time.year}-${time.month}-${time.date} ${time.hours}:${time.minutes}:${time.minutes}`,
+        //     time: `${time.hours}:${time.minutes}`
+        // }).then((resp) => {
+        //     // response
+        //     console.log(resp);
+        // }).catch((error) => {
+        //     console.log(error);
+        // });
         
     };
 

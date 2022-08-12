@@ -1,6 +1,7 @@
 import React from 'react';
 
-const ChatMessageSend = ({content, time, date}) => {
+const ChatMessageSend = ({content, date, time}) => {
+    
     return (
         <div className="d-flex flex-row justify-content-end">
             <div>
