@@ -124,13 +124,12 @@ const Chat = () => {
         //let timestring = `${time.year}/${time.month}/${time.date} ${time.hours}:${time.minutes}`;
         
         client.current.publish({
-            destination: `/topic/chat/room/${roomIdSelected}`,
+            destination: `/app/chat/message`,
             body: JSON.stringify({
-                roomSeq: roomIdSelected,
+                roomId: roomIdSelected,
                 message: line,
                 sender: sender,
-                date: `${time.month}월${time.date}일`,
-                time: `${time.hours}:${time.minutes}`
+                dateTime: `${time.year}-${time.month}-${time.date} ${time.hours}:${time.minutes}:${time.minutes}`
             }),
         });
 

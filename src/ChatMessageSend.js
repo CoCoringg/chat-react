@@ -5,7 +5,7 @@ const ChatMessageSend = ({content, date, time}) => {
     return (
         <div className="d-flex flex-row justify-content-end">
             <div>
-                <p className="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">
+                <p className="small p-2 me-3 mb-1 text-white rounded-3 bg-primary1" >
                     {content}</p>
                 <p className="small me-3 mb-3 rounded-3 text-muted">{time} | {date}</p>
             </div>
